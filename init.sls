@@ -13,19 +13,9 @@ host-{{ host }}:
 sync-software:
   pkg.installed:
     - pkgs:
-      - xinetd
       - csync2
       - lsyncd
-
-# csync2 configuration for xinetd
-{{ sync.xinetd_path }}/csync2:
-  file.managed:
-    - source: salt://sync/files/xinetd.d/csync2
-    - template: jinja
-    - mode: 644
-    - user: root
-    - group: root
-
+      
 # csync2 directory
 {{ sync.csync2_path }}:
   file.directory:
@@ -84,13 +74,6 @@ sync-software:
     - requires:
       - file: {{ sync.csync2_path }}/csync2_{{ clean_hostname }}.cfg
 {% endfor %}
-
-xinetd:
-  service:
-    - running
-    - enable: True
-    - watch:
-      - file: {{ sync.xinetd_path }}/csync2
 
 /etc/lsyncd/lsyncd.conf.lua:
   file.managed:

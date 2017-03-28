@@ -1,6 +1,6 @@
 # A salt formula for syncing web files across multiple web servers.
 
-This formula utilizes lsyncd, csync2, and xinetd.
+This formula utilizes lsyncd, csync2.
 
 These states are very, very version specific.
 Only tested so far on Ubuntu 12.04, Lsyncd 2.0.4. The lua for the lsyncd
